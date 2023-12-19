@@ -5,9 +5,15 @@ import { getRandNum } from "@/utils/number";
 import { useMemo } from "react";
 import Image from "next/image";
 import styles from "./index.module.scss";
+import { get } from "http";
 
 export const RandomPokemon = () => {
-  const randomPokemonId = useMemo(() => getRandNum(1, POKEMON_TOTAL), []);
+  const { randomPokemonId, shinyPokemon } = useMemo(() => {
+    return {
+      randomPokemonId: getRandNum(1, POKEMON_TOTAL),
+      shinyPokemon: getRandNum(0, 1000) <= 50,
+    };
+  }, []);
 
   const { data, error, isLoading } = usePokemon(randomPokemonId);
 
@@ -27,12 +33,15 @@ export const RandomPokemon = () => {
     <div className={styles["random-pokemon"]}>
       <h1>{data.name}</h1>
       <Image
-        src={data.sprites.front_default}
+        src={
+          shinyPokemon ? data.sprites.front_default : data.sprites.front_shiny
+        }
         alt={data.name}
         width={150}
         height={150}
         priority={true}
       />
+      {shinyPokemon ? <p>Shiny! ✨</p> : <p>&zwnj;</p>}
     </div>
   );
 };
