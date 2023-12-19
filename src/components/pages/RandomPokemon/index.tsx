@@ -4,6 +4,7 @@ import { usePokemon } from "@/hooks/usePokemon";
 import { getRandNum } from "@/utils/number";
 import { useMemo } from "react";
 import Image from "next/image";
+import styles from "./index.module.scss";
 
 export const RandomPokemon = () => {
   const randomPokemonId = useMemo(() => getRandNum(1, POKEMON_TOTAL), []);
@@ -23,13 +24,14 @@ export const RandomPokemon = () => {
   }
 
   return (
-    <div>
+    <div className={styles["random-pokemon"]}>
       <h1>{data.name}</h1>
       <Image
         src={data.sprites.front_default}
         alt={data.name}
-        width={200}
-        height={200}
+        width={150}
+        height={150}
+        priority={true}
       />
     </div>
   );

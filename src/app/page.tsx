@@ -1,8 +1,9 @@
 import { RandomPokemon } from "@/components/pages/RandomPokemon";
+import styles from "./page.module.scss";
 
 const Home = () => {
   return (
-    <main>
+    <main className={styles["page-wrapper"]}>
       <RandomPokemon />
     </main>
   );
