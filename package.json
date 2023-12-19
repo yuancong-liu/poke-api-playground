@@ -48,5 +48,6 @@
     "stylelint-order": "^6.0.4",
     "stylelint-prettier": "^5.0.0",
     "typescript": "^5"
-  }
+  },
+  "packageManager": "yarn@4.0.2"
 }
