@@ -1,3 +1,11 @@
-export default function Home() {
-  return <main>Hello world!</main>;
-}
+import { RandomPokemon } from "@/components/pages/RandomPokemon";
+
+const Home = () => {
+  return (
+    <main>
+      <RandomPokemon />
+    </main>
+  );
+};
+
+export default Home;
