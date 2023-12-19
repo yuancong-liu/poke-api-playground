@@ -34,7 +34,7 @@ export const RandomPokemon = () => {
       <h1>{data.name}</h1>
       <Image
         src={
-          shinyPokemon ? data.sprites.front_default : data.sprites.front_shiny
+          shinyPokemon ? data.sprites.front_shiny : data.sprites.front_default
         }
         alt={data.name}
         width={150}
