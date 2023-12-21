@@ -1,7 +1,9 @@
 "use client";
 import { useCallback, useMemo, useState } from "react";
 
-import { ImageWithLoading } from "@/components/common/ImageWithLoading";
+import Link from "next/link";
+
+import { ImageWithLoading } from "@/components/common/imageWithLoading";
 import { POKEMON_TOTAL } from "@/constants/pokemon";
 import { usePokemon } from "@/hooks/usePokemon";
 import { getRandNum } from "@/utils/number";
@@ -22,6 +24,11 @@ export const RandomPokemon = () => {
     };
   }, []);
 
+  const pathToDetail = useMemo(
+    () => `/pokemon/${randomPokemonId}`,
+    [randomPokemonId],
+  );
+
   const { data, error, isLoading } = usePokemon(randomPokemonId);
 
   if (isLoading) {
@@ -38,7 +45,13 @@ export const RandomPokemon = () => {
 
   return (
     <div className={styles["random-pokemon"]}>
-      {imageLoaded ? <h1>{data.name.toUpperCase()}</h1> : <h1>&zwnj;</h1>}
+      {imageLoaded ? (
+        <Link className={styles["name"]} href={pathToDetail}>
+          {data.name}
+        </Link>
+      ) : (
+        <h1>&zwnj;</h1>
+      )}
       <div className={styles["pokemon-sprite"]}>
         <ImageWithLoading
           src={
