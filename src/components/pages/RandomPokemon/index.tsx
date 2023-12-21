@@ -18,7 +18,7 @@ export const RandomPokemon = () => {
   const { data, error, isLoading } = usePokemon(randomPokemonId);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div>Random Pokémon fetching...</div>;
   }
 
   if (error) {
