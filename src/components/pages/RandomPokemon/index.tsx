@@ -2,12 +2,12 @@
 import { POKEMON_TOTAL } from "@/constants/pokemon";
 import { usePokemon } from "@/hooks/usePokemon";
 import { getRandNum } from "@/utils/number";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import Image from "next/image";
 import styles from "./index.module.scss";
-import { get } from "http";
 
 export const RandomPokemon = () => {
+  const [imageLoaded, setImageLoaded] = useState(false);
   const { randomPokemonId, shinyPokemon } = useMemo(() => {
     return {
       randomPokemonId: getRandNum(1, POKEMON_TOTAL),
