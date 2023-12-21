@@ -1,6 +1,8 @@
 import { Ref, useState } from "react";
+
 import classNames from "classnames";
 import Image from "next/image";
+
 import styles from "./index.module.scss";
 
 type Props = {

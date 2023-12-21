@@ -1,10 +1,12 @@
 "use client";
+import { useCallback, useMemo, useState } from "react";
+
+import { ImageWithLoading } from "@/components/common/ImageWithLoading";
 import { POKEMON_TOTAL } from "@/constants/pokemon";
 import { usePokemon } from "@/hooks/usePokemon";
 import { getRandNum } from "@/utils/number";
-import { useCallback, useMemo, useState } from "react";
+
 import styles from "./index.module.scss";
-import { ImageWithLoading } from "@/components/common/ImageWithLoading";
 
 export const RandomPokemon = () => {
   const [imageLoaded, setImageLoaded] = useState(false);

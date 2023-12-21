@@ -1,6 +1,7 @@
+import useSWR from "swr";
+
 import { IPokemon } from "@/types/Pokemon/Pokemon";
 import { axiosInstance } from "@/utils/axios";
-import useSWR from "swr";
 
 export const usePokemon = (id: number) => {
   const fetcher = (url: string) =>

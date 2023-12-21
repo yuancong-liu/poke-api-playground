@@ -1,4 +1,5 @@
 import { RandomPokemon } from "@/components/pages/RandomPokemon";
+
 import styles from "./page.module.scss";
 
 export const metadata = {
