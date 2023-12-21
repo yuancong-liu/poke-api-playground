@@ -36,9 +36,9 @@ export const ImageWithLoading = ({
         src={src}
         alt={alt}
         fill
-        style={{ objectFit: "cover" }}
-        loading="lazy"
-        onLoadingComplete={handleLoadedComplete}
+        sizes="100%"
+        priority
+        onLoad={handleLoadedComplete}
       />
     </div>
   );

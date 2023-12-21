@@ -3,7 +3,9 @@ import useSWR from "swr";
 import { IPokemon } from "@/types/Pokemon/Pokemon";
 import { axiosInstance } from "@/utils/axios";
 
-export const usePokemon = (id: number) => {
+type Id = number | string;
+
+export const usePokemon = (id: Id) => {
   const fetcher = (url: string) =>
     axiosInstance.get(url).then((res) => res.data);
 

@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useMemo, useState } from "react";
 
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { ImageWithLoading } from "@/components/common/imageWithLoading";
 import { POKEMON_TOTAL } from "@/constants/pokemon";
@@ -11,6 +11,8 @@ import { getRandNum } from "@/utils/number";
 import styles from "./index.module.scss";
 
 export const RandomPokemon = () => {
+  const router = useRouter();
+
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const imageLoadedHandler = useCallback(() => {
@@ -24,40 +26,33 @@ export const RandomPokemon = () => {
     };
   }, []);
 
-  const pathToDetail = useMemo(
-    () => `/pokemon/${randomPokemonId}`,
-    [randomPokemonId],
-  );
+  const goToDetail = useCallback(() => {
+    router.push(`/pokemon/${randomPokemonId}`);
+  }, [randomPokemonId, router]);
 
-  const { data, error, isLoading } = usePokemon(randomPokemonId);
+  const { data: pokemon, error, isLoading } = usePokemon(randomPokemonId);
 
-  if (isLoading) {
-    return <div>Random Pokémon fetching...</div>;
-  }
-
-  if (error) {
-    return <div>Error!</div>;
-  }
-
-  if (!data) {
-    return <div>No data!</div>;
-  }
+  if (isLoading) return <div>Random Pokémon fetching...</div>;
+  if (error) return <div>Error!</div>;
+  if (!pokemon) return <div>No data!</div>;
 
   return (
     <div className={styles["random-pokemon"]}>
       {imageLoaded ? (
-        <Link className={styles["name"]} href={pathToDetail}>
-          {data.name}
-        </Link>
+        <button className={styles["name"]} onClick={goToDetail}>
+          {pokemon.name}
+        </button>
       ) : (
         <h1>&zwnj;</h1>
       )}
       <div className={styles["pokemon-sprite"]}>
         <ImageWithLoading
           src={
-            shinyPokemon ? data.sprites.front_shiny : data.sprites.front_default
+            shinyPokemon
+              ? pokemon.sprites.front_shiny
+              : pokemon.sprites.front_default
           }
-          alt={data.name}
+          alt={pokemon.name}
           loadedCompleteHandler={imageLoadedHandler}
         />
       </div>

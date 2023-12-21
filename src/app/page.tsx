@@ -1,4 +1,4 @@
-import { RandomPokemon } from "@/components/pages/RandomPokemon";
+import { RandomPokemon } from "@/components/pages/top/RandomPokemon";
 
 import styles from "./page.module.scss";
 

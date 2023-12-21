@@ -1,8 +1,17 @@
-const PokemonDetailPage = () => {
+import { PokemonDetailPanel } from "@/components/pages/pokemon/DetailPanel";
+
+type Props = {
+  params: {
+    id: string;
+  };
+};
+const PokemonDetailPage = ({ params }: Props) => {
+  const { id } = params;
+
   return (
-    <div>
-      <h1>PokemonDetailPage</h1>
-    </div>
+    <main>
+      <PokemonDetailPanel id={id} />
+    </main>
   );
 };
 
