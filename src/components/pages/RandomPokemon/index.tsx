@@ -31,7 +31,7 @@ export const RandomPokemon = () => {
 
   return (
     <div className={styles["random-pokemon"]}>
-      <h1>{data.name}</h1>
+      {imageLoaded ? <h1>{data.name}</h1> : <h1>&zwnj;</h1>}
       <Image
         src={
           shinyPokemon ? data.sprites.front_shiny : data.sprites.front_default
@@ -40,8 +40,9 @@ export const RandomPokemon = () => {
         width={150}
         height={150}
         priority={true}
+        onLoadingComplete={() => setImageLoaded(true)}
       />
-      {shinyPokemon ? <p>Shiny! ✨</p> : <p>&zwnj;</p>}
+      {imageLoaded && shinyPokemon ? <p>Shiny! ✨</p> : <p>&zwnj;</p>}
     </div>
   );
 };
