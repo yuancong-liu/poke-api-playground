@@ -1,6 +1,7 @@
 "use client";
 import { CSSProperties, useCallback, useMemo, useState } from "react";
 
+import classNames from "classnames";
 import { useColor } from "color-thief-react";
 import { useRouter } from "next/navigation";
 
@@ -10,7 +11,6 @@ import { usePokemon } from "@/hooks/usePokemon";
 import { getRandNum } from "@/utils/number";
 
 import styles from "./index.module.scss";
-import classNames from "classnames";
 
 export const RandomPokemon = () => {
   const router = useRouter();
