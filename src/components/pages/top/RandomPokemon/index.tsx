@@ -1,6 +1,7 @@
 "use client";
-import { useCallback, useMemo, useState } from "react";
+import { CSSProperties, useCallback, useMemo, useState } from "react";
 
+import { useColor } from "color-thief-react";
 import { useRouter } from "next/navigation";
 
 import { ImageWithLoading } from "@/components/common/imageWithLoading";
@@ -30,7 +31,17 @@ export const RandomPokemon = () => {
     router.push(`/pokemon/${randomPokemonId}`);
   }, [randomPokemonId, router]);
 
-  const { data: pokemon, error, isLoading } = usePokemon(randomPokemonId);
+  const { pokemon, error, isLoading } = usePokemon(randomPokemonId);
+
+  const { data: color } = useColor(
+    shinyPokemon
+      ? pokemon?.sprites!.front_shiny!
+      : pokemon?.sprites!.front_default!,
+    "hex",
+    {
+      crossOrigin: "Anonymous",
+    },
+  );
 
   if (isLoading) return <div>Random Pokémon fetching...</div>;
   if (error) return <div>Error!</div>;
@@ -49,11 +60,19 @@ export const RandomPokemon = () => {
         <ImageWithLoading
           src={
             shinyPokemon
-              ? pokemon.sprites.front_shiny
-              : pokemon.sprites.front_default
+              ? pokemon.sprites!.front_shiny
+              : pokemon.sprites!.front_default
           }
           alt={pokemon.name}
           loadedCompleteHandler={imageLoadedHandler}
+        />
+        <div
+          className={styles["glorying"]}
+          style={
+            {
+              "--dominant-color": color ?? "transparent",
+            } as CSSProperties
+          }
         />
       </div>
       {imageLoaded && shinyPokemon ? <p>Shiny! ✨</p> : <p>&zwnj;</p>}

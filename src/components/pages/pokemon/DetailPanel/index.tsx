@@ -9,7 +9,7 @@ type Props = {
 };
 
 export const PokemonDetailPanel = ({ id }: Props) => {
-  const { data: pokemon, error, isLoading } = usePokemon(id);
+  const { pokemon, error, isLoading } = usePokemon(id);
 
   if (isLoading) return <div>Random Pokémon fetching...</div>;
   if (error) return <div>Error!</div>;

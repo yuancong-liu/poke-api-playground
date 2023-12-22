@@ -9,9 +9,11 @@ export const usePokemon = (id: Id) => {
   const fetcher = (url: string) =>
     axiosInstance.get(url).then((res) => res.data);
 
-  const { data, error, isLoading } = useSWR<IPokemon>(
-    `https://pokeapi.co/api/v2/pokemon/${id}/`,
-    fetcher,
-  );
-  return { data, error, isLoading };
+  const {
+    data: pokemon,
+    error,
+    isLoading,
+  } = useSWR<IPokemon>(`https://pokeapi.co/api/v2/pokemon/${id}/`, fetcher);
+
+  return { pokemon, error, isLoading };
 };
