@@ -10,6 +10,7 @@ import { usePokemon } from "@/hooks/usePokemon";
 import { getRandNum } from "@/utils/number";
 
 import styles from "./index.module.scss";
+import classNames from "classnames";
 
 export const RandomPokemon = () => {
   const router = useRouter();
@@ -67,7 +68,10 @@ export const RandomPokemon = () => {
           loadedCompleteHandler={imageLoadedHandler}
         />
         <div
-          className={styles["glorying"]}
+          className={classNames(
+            styles["glorying"],
+            imageLoaded && styles["-ready"],
+          )}
           style={
             {
               "--dominant-color": color ?? "transparent",
